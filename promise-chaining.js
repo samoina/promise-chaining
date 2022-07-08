@@ -62,6 +62,24 @@ In the piece of code above, I called the add method and passed two arguments int
 Once I created the promise, i called the .then() method to handle the resolved result from the add() function AND THEN use that result and a second number, in this case 15, for the subtract function. AND THEN use the result from the subtract operation to display the result
 */
 
+// add(20, 10)
+// .then(function(resultAdd){
+//   return subtract(resultAdd, 15)
+// })
+// .then(function(resultMinus){
+//   return multiply(resultMinus, 100)
+// })
+// .then(function(resultMult){
+//   return divide(resultMult, 3)
+// })
+// .then(function(resultDiv){
+//   console.log(`The answer is ${resultDiv}`);
+// })
+
+/*
+In the code above, I have worked with promise chaining to 'pass down' the result of a mathermatical operation to the next one as one of the values. Once the four operations are complete, I then display the result.
+*/
+
 add(20, 10)
 .then(function(resultAdd){
   return subtract(resultAdd, 15)
@@ -70,14 +88,23 @@ add(20, 10)
   return multiply(resultMinus, 100)
 })
 .then(function(resultMult){
-  return divide(resultMult, 3)
+  return divide(resultMult, 'b')
 })
 .then(function(resultDiv){
   console.log(`The answer is ${resultDiv}`);
 })
+.catch(function(error){
+  console.log(error.message);
+})
+.finally(function(){
+  console.log('End of Math class');
+})
 
 /*
-In the code above, I have worked with promise chaining to 'pass down' the result of a mathermatical operation to the next one as one of the values. Once the four operations are complete, I then display the result.
+In the code above, I created a promise chain that would eventually display the answer after all the four operations. I then used the .catch
+() handler to deal with errors, eg in the event that I pass a letter, instead of a number. Depending on the operation that I add the letter to, the error will be specific to that operation. eg: could not divide/add/multiply/subtract the values. 
+
+the .finally() handler on the other hand, is tasked with cleanups/wrapups and will be called regardless of whether the promise is resolved or rejected. 
 */
 
 
