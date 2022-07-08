@@ -114,7 +114,7 @@ let getUser = new Promise(function(resolve, reject){
     name: 'Jontez Diallo',
     email: 'jontez@goo.com',
     password: 123,
-    permissions:['db', 'hr', 'dev']
+    permissions:['db', 'hrr', 'dev']
   }
   resolve(user);
 })
@@ -165,7 +165,26 @@ getUser
   console.log(error);
 })
 
+//4. RETHROW FROM THE .catch() handler
+let promise = new Promise(function(resolve, reject){
+  reject(401);
+})
 
+promise
+.catch(function(error){
+  if(error===401){
+    console.log('Rethrowing the error');
+    throw error;
+  } else {
+
+  }
+})
+.then(function(value){
+  console.log(value);
+})
+.catch(function(error){
+  console.log(error);
+})
 
 
 
