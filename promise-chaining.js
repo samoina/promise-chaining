@@ -108,7 +108,7 @@ the .finally() handler on the other hand, is tasked with cleanups/wrapups and wi
 */
 
 
-//RETURNING A PROMISE FROM THE .THEN HANDLER - oused when an async call is initiated based omn the result of a previous async call
+
 let getUser = new Promise(function(resolve, reject){
   const user = {
     name: 'Jontez Diallo',
@@ -117,6 +117,8 @@ let getUser = new Promise(function(resolve, reject){
   }
   resolve(user);
 })
+
+//1. RETURNING A PROMISE FROM THE .THEN HANDLER - oused when an async call is initiated based omn the result of a previous async call
 
 getUser
 .then(function(user){
@@ -135,7 +137,15 @@ getUser
 In the code above, I have created a promise that allows me to access a user's details. I use the .then() handler to display the user's name and then return a promise that gets the user's address. From this promise, i use a .then() handler to display the address, based on the first results.
 */
 
-
+//2. RETURN A SIMPLE VALUE FROM THE .THEN() HANDLER and process it in the next then() handler
+getUser
+.then(function(user){
+  console.log(`Got the user's name: ${user.name} `);
+  return user.email;
+})
+.then(function(email){
+  console.log(`The user's email is ${email}`);
+})
 
 
 
