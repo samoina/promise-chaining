@@ -45,7 +45,8 @@ let divide = function (x, y){
   })
 }
 
-
+/* in the example above, I simply created a function that would return a promise object. By definition, a Promise is a special JS object that produces a value after an asynchronous operation. The promise would get resolved if I got the result of the ,mathematical operation, otherwise it would be rejected with an error object. At this point, the promise is pending since it has neither bn resolved or rejected. I also took note of the executor function within the Promise Constructor Function. The executor function takes in two arguments - resolve and reject, both of which are callbacks provided within JS.
+*/
 
 
 
