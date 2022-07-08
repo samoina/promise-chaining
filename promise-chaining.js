@@ -48,21 +48,37 @@ let divide = function (x, y){
 /* in the example above, I simply created a function that would return a promise object. By definition, a Promise is a special JS object that produces a value after an asynchronous operation. The promise would get resolved if I got the result of the ,mathematical operation, otherwise it would be rejected with an error object. At this point, the promise is pending since it has neither bn resolved or rejected. I also took note of the executor function within the Promise Constructor Function. The executor function takes in two arguments - resolve and reject, both of which are callbacks provided within JS. the executor funtion completes the task asynchronously.
 */
 
-add(20, 10)
-.then(function(resultAdd){
-  return subtract(resultAdd, 15)
-})
-.then(function(resultSubtract){
-  console.log(`The answer is ${resultSubtract}`);
-})
+// add(20, 10)
+// .then(function(resultAdd){
+//   return subtract(resultAdd, 15)
+// })
+// .then(function(resultSubtract){
+//   console.log(`The answer is ${resultSubtract}`);
+// })
 
 /*
-In the text above, I called the add method and passed two arguments into it. this would allow the add function to find the sum of 20 and 10 =30. With promises, there's the executor function (mentioned in the notes above) and a consumer function. The latter uses the outcome of a promise. To link these two functions, JS makes use of handler methods, namely .then(), .catch() and .finally(). 
+In the piece of code above, I called the add method and passed two arguments into it. this would allow the add function to find the sum of 20 and 10 =30. With promises, there's the executor function (mentioned in the notes above) and a consumer function. The latter uses the outcome of a promise. To link these two functions, JS makes use of handler methods, namely .then(), .catch() and .finally(). 
 
 Once I created the promise, i called the .then() method to handle the resolved result from the add() function AND THEN use that result and a second number, in this case 15, for the subtract function. AND THEN use the result from the subtract operation to display the result
 */
 
+add(20, 10)
+.then(function(resultAdd){
+  return subtract(resultAdd, 15)
+})
+.then(function(resultMinus){
+  return multiply(resultMinus, 100)
+})
+.then(function(resultMult){
+  return divide(resultMult, 3)
+})
+.then(function(resultDiv){
+  console.log(`The answer is ${resultDiv}`);
+})
 
+/*
+In the code above, I have worked with promise chaining to 'pass down' the result of a mathermatical operation to the next one as one of the values. Once the four operations are complete, I then display the result.
+*/
 
 
 
