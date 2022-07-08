@@ -1,4 +1,4 @@
-//example of promises
+//PROMISE CHAINING
 let add = function (x, y){
   return new Promise(function(resolve, reject){
     let resultAdd = x + y;
@@ -88,7 +88,7 @@ add(20, 10)
   return multiply(resultMinus, 100)
 })
 .then(function(resultMult){
-  return divide(resultMult, 'b')
+  return divide(resultMult, 2)
 })
 .then(function(resultDiv){
   console.log(`The answer is ${resultDiv}`);
@@ -106,6 +106,39 @@ In the code above, I created a promise chain that would eventually display the a
 
 the .finally() handler on the other hand, is tasked with cleanups/wrapups and will be called regardless of whether the promise is resolved or rejected. 
 */
+
+
+//RETURNING A PROMISE FROM THE .THEN HANDLER - oused when an async call is initiated based omn the result of a previous async call
+let getUser = new Promise(function(resolve, reject){
+  const user = {
+    name: 'Jontez Diallo',
+    email: 'jontez@goo.com',
+    password: 123
+  }
+  resolve(user);
+})
+
+getUser
+.then(function(user){
+  console.log(`Got the user's name: ${user.name}`);
+  return new Promise(function(resolve, reject){
+    setTimeout(() => {
+      resolve('Bangla')
+    }, 1000);
+  })
+})
+.then(function(address){
+  console.log(`User lives in ${address}`);
+})
+
+/*
+In the code above, I have created a promise that allows me to access a user's details. I use the .then() handler to display the user's name and then return a promise that gets the user's address. From this promise, i use a .then() handler to display the address, based on the first results.
+*/
+
+
+
+
+
 
 
 
