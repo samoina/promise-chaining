@@ -45,8 +45,24 @@ let divide = function (x, y){
   })
 }
 
-/* in the example above, I simply created a function that would return a promise object. By definition, a Promise is a special JS object that produces a value after an asynchronous operation. The promise would get resolved if I got the result of the ,mathematical operation, otherwise it would be rejected with an error object. At this point, the promise is pending since it has neither bn resolved or rejected. I also took note of the executor function within the Promise Constructor Function. The executor function takes in two arguments - resolve and reject, both of which are callbacks provided within JS.
+/* in the example above, I simply created a function that would return a promise object. By definition, a Promise is a special JS object that produces a value after an asynchronous operation. The promise would get resolved if I got the result of the ,mathematical operation, otherwise it would be rejected with an error object. At this point, the promise is pending since it has neither bn resolved or rejected. I also took note of the executor function within the Promise Constructor Function. The executor function takes in two arguments - resolve and reject, both of which are callbacks provided within JS. the executor funtion completes the task asynchronously.
 */
+
+add(20, 10)
+.then(function(resultAdd){
+  return subtract(resultAdd, 15)
+})
+.then(function(resultSubtract){
+  console.log(`The answer is ${resultSubtract}`);
+})
+
+/*
+In the text above, I called the add method and passed two arguments into it. this would allow the add function to find the sum of 20 and 10 =30. With promises, there's the executor function (mentioned in the notes above) and a consumer function. The latter uses the outcome of a promise. To link these two functions, JS makes use of handler methods, namely .then(), .catch() and .finally(). 
+
+Once I created the promise, i called the .then() method to handle the resolved result from the add() function AND THEN use that result and a second number, in this case 15, for the subtract function. AND THEN use the result from the subtract operation to display the result
+*/
+
+
 
 
 
