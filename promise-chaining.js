@@ -113,41 +113,57 @@ let getUser = new Promise(function(resolve, reject){
   const user = {
     name: 'Jontez Diallo',
     email: 'jontez@goo.com',
-    password: 123
+    password: 123,
+    permissions:['db', 'hr', 'dev']
   }
   resolve(user);
 })
 
 //1. RETURNING A PROMISE FROM THE .THEN HANDLER - oused when an async call is initiated based omn the result of a previous async call
 
-getUser
-.then(function(user){
-  console.log(`Got the user's name: ${user.name}`);
-  return new Promise(function(resolve, reject){
-    setTimeout(() => {
-      resolve('Bangla')
-    }, 1000);
-  })
-})
-.then(function(address){
-  console.log(`User lives in ${address}`);
-})
+// getUser
+// .then(function(user){
+//   console.log(`Got the user's name: ${user.name}`);
+//   return new Promise(function(resolve, reject){
+//     setTimeout(() => {
+//       resolve('Bangla')
+//     }, 1000);
+//   })
+// })
+// .then(function(address){
+//   console.log(`User lives in ${address}`);
+// })
 
 /*
 In the code above, I have created a promise that allows me to access a user's details. I use the .then() handler to display the user's name and then return a promise that gets the user's address. From this promise, i use a .then() handler to display the address, based on the first results.
 */
 
 //2. RETURN A SIMPLE VALUE FROM THE .THEN() HANDLER and process it in the next then() handler
+// getUser
+// .then(function(user){
+//   console.log(`Got the user's name: ${user.name} `);
+//   return user.email;
+// })
+// .then(function(email){
+//   console.log(`The user's email is ${email}`);
+// })
+
+//3. THROW AN ERROR FROM THE .then() handler
+
 getUser
 .then(function(user){
-  console.log(`Got the user's name: ${user.name} `);
+  console.log(`Got the user's name: ${user.name}`);
+  if(user.permissions.includes('hr')){
+    throw new Error('Permission denied. You cannot access the HR module');
+  }
   return user.email;
 })
 .then(function(email){
-  console.log(`The user's email is ${email}`);
+  console.log(`User email is ${email}`);
 })
-
-
+.catch(function(error){
+  console.log(error);
+})
 
 
 
