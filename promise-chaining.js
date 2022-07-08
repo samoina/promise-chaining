@@ -80,25 +80,25 @@ Once I created the promise, i called the .then() method to handle the resolved r
 In the code above, I have worked with promise chaining to 'pass down' the result of a mathermatical operation to the next one as one of the values. Once the four operations are complete, I then display the result.
 */
 
-add(20, 10)
-.then(function(resultAdd){
-  return subtract(resultAdd, 15)
-})
-.then(function(resultMinus){
-  return multiply(resultMinus, 100)
-})
-.then(function(resultMult){
-  return divide(resultMult, 2)
-})
-.then(function(resultDiv){
-  console.log(`The answer is ${resultDiv}`);
-})
-.catch(function(error){
-  console.log(error.message);
-})
-.finally(function(){
-  console.log('End of Math class');
-})
+// add(20, 10)
+// .then(function(resultAdd){
+//   return subtract(resultAdd, 15)
+// })
+// .then(function(resultMinus){
+//   return multiply(resultMinus, 100)
+// })
+// .then(function(resultMult){
+//   return divide(resultMult, 2)
+// })
+// .then(function(resultDiv){
+//   console.log(`The answer is ${resultDiv}`);
+// })
+// .catch(function(error){
+//   console.log(error.message);
+// })
+// .finally(function(){
+//   console.log('End of Math class');
+// })
 
 /*
 In the code above, I created a promise chain that would eventually display the answer after all the four operations. I then used the .catch
@@ -150,20 +150,20 @@ In the code above, I have created a promise that allows me to access a user's de
 
 //3. THROW AN ERROR FROM THE .then() handler
 
-getUser
-.then(function(user){
-  console.log(`Got the user's name: ${user.name}`);
-  if(user.permissions.includes('hr')){
-    throw new Error('Permission denied. You cannot access the HR module');
-  }
-  return user.email;
-})
-.then(function(email){
-  console.log(`User email is ${email}`);
-})
-.catch(function(error){
-  console.log(error);
-})
+// getUser
+// .then(function(user){
+//   console.log(`Got the user's name: ${user.name}`);
+//   if(user.permissions.includes('hr')){
+//     throw new Error('Permission denied. You cannot access the HR module');
+//   }
+//   return user.email;
+// })
+// .then(function(email){
+//   console.log(`User email is ${email}`);
+// })
+// .catch(function(error){
+//   console.log(error);
+// })
 
 //4. RETHROW FROM THE .catch() handler
 // let promise = new Promise(function(resolve, reject){
@@ -188,22 +188,44 @@ getUser
 
 //5. USING THE .finally() method
 
-let myPromise = new Promise(function(resolve, reject){
-  resolve('Finally testing');
-});
+// let myPromise = new Promise(function(resolve, reject){
+//   resolve('Finally testing');
+// });
 
-myPromise
-.finally(function(){
-  console.log('Running .finally()');
+// myPromise
+// .finally(function(){
+//   console.log('Running .finally()');
+// })
+// .then(function(value){
+//   console.log(value);
+// })
+
+//6. Remember that calling .then() handler multiple times on one promise is NOT chaining
+
+let lePromise = new Promise(function(resolve, reject){
+  resolve(10);
 })
+
+lePromise
 .then(function(value){
+  value++
   console.log(value);
 })
 
+lePromise
+.then(function(value){
+  value = value + 10;
+  console.log(value);
+})
 
+lePromise
+.then(function(value){
+  value = value+20;
+  console.log(value);
+  return value;
+})
 
-
-
+//This will log 11, 20 and 30 to the console because there is no chain here
 
 
 
