@@ -166,24 +166,38 @@ getUser
 })
 
 //4. RETHROW FROM THE .catch() handler
-let promise = new Promise(function(resolve, reject){
-  reject(401);
-})
+// let promise = new Promise(function(resolve, reject){
+//   reject(401);
+// })
 
-promise
-.catch(function(error){
-  if(error===401){
-    console.log('Rethrowing the error');
-    throw error;
-  } else {
+// promise
+// .catch(function(error){
+//   if(error===401){
+//     console.log('Rethrowing the error');
+//     throw error;
+//   } else {
 
-  }
+//   }
+// })
+// .then(function(value){
+//   console.log(value);
+// })
+// .catch(function(error){
+//   console.log(error);
+// })
+
+//5. USING THE .finally() method
+
+let myPromise = new Promise(function(resolve, reject){
+  resolve('Finally testing');
+});
+
+myPromise
+.finally(function(){
+  console.log('Running .finally()');
 })
 .then(function(value){
   console.log(value);
-})
-.catch(function(error){
-  console.log(error);
 })
 
 
