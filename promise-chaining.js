@@ -202,14 +202,14 @@ In the code above, I have created a promise that allows me to access a user's de
 
 //6a. Remember that calling .then() handler multiple times on one promise is NOT chaining
 
-let lePromise = new Promise(function(resolve, reject){
-  let value = 'b';
-  if(isNaN(value)=== false){
-    resolve(value);
-  } else {
-    reject(new Error('Try again. The value is NaN'))
-  }
-})
+// let lePromise = new Promise(function(resolve, reject){
+//   let value = 'b';
+//   if(isNaN(value)=== false){
+//     resolve(value);
+//   } else {
+//     reject(new Error('Try again. The value is NaN'))
+//   }
+// })
 
 // lePromise
 // .then(function(value){
@@ -233,21 +233,60 @@ let lePromise = new Promise(function(resolve, reject){
 //This will log 11, 20 and 30 to the console because there is no chain here
 
 //6b) show promise chaining below where the first result is passed down to the rest of the handlers
-lePromise
-.then(function(value){
-  value++;
-  return value;
+// lePromise
+// .then(function(value){
+//   value++;
+//   return value;
+// })
+// .then(function(value){
+//   value+=20;
+//   return value;
+// })
+// .then(function(value){
+//   value *=10;
+//   console.log(`the answer is ${value}`);
+//   return value;
+// })
+// .catch(function(error){
+//   console.log(error.message);
+// })
+
+//7. Solid example from https://blog.greenroots.info/javascript-promise-chain-the-art-of-handling-promises the code below is my take before looking at the website's solution
+
+let orderPizza = ()=>{
+  return new Promise(function(resolve, reject){
+    let nearestPizzaShop = true,
+        pizzaChoice = 'hawaiian';
+    if(nearestPizzaShop && pizzaChoice==='hawaiian'){
+      let feedback = {
+          message: `Shop located nearby. ${pizzaChoice} pizza is available`,
+          complimentaryDrink: 'cola'
+      }
+
+      resolve(feedback)
+    } else {
+      reject(new Error(`We are sorry. ${pizzaChoice} is unavailable`))
+    }
+  })
+}
+
+orderPizza()
+.then(function(feedback){
+  console.log(feedback.message);  
+  return feedback.complimentaryDrink;
 })
-.then(function(value){
-  value+=20;
-  return value;
+.then(function(drink){
+  console.log(`You also get a free complimentary ${drink} :)`);
 })
-.then(function(value){
-  value *=10;
-  console.log(`the answer is ${value}`);
-  return value;
+.then(function(){
+  console.log('Your order has been received and created');
+})
+.then(function(){
+  console.log('Your order will be delivered shortly');
 })
 .catch(function(error){
   console.log(error.message);
 })
-
+.finally(function(){
+  console.log('Thank you for getting in touch with Pizza Hub');
+})
