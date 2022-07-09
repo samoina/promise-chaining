@@ -200,32 +200,54 @@ In the code above, I have created a promise that allows me to access a user's de
 //   console.log(value);
 // })
 
-//6. Remember that calling .then() handler multiple times on one promise is NOT chaining
+//6a. Remember that calling .then() handler multiple times on one promise is NOT chaining
 
 let lePromise = new Promise(function(resolve, reject){
-  resolve(10);
+  let value = 'b';
+  if(isNaN(value)=== false){
+    resolve(value);
+  } else {
+    reject(new Error('Try again. The value is NaN'))
+  }
 })
 
-lePromise
-.then(function(value){
-  value++
-  console.log(value);
-})
+// lePromise
+// .then(function(value){
+//   value++
+//   console.log(value);
+// })
 
-lePromise
-.then(function(value){
-  value = value + 10;
-  console.log(value);
-})
+// lePromise
+// .then(function(value){
+//   value = value + 10;
+//   console.log(value);
+// })
 
-lePromise
-.then(function(value){
-  value = value+20;
-  console.log(value);
-  return value;
-})
+// lePromise
+// .then(function(value){
+//   value = value+20;
+//   console.log(value);
+//   return value;
+// })
 
 //This will log 11, 20 and 30 to the console because there is no chain here
 
-
+//6b) show promise chaining below where the first result is passed down to the rest of the handlers
+lePromise
+.then(function(value){
+  value++;
+  return value;
+})
+.then(function(value){
+  value+=20;
+  return value;
+})
+.then(function(value){
+  value *=10;
+  console.log(`the answer is ${value}`);
+  return value;
+})
+.catch(function(error){
+  console.log(error.message);
+})
 
